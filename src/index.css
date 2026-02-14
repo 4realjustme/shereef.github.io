@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    * {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        /* Light Mode: Ultra-clean, subtle warmth */
+        background: #fbfbfd;
+        color: #1d1d1f;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Outfit', sans-serif;
+        letter-spacing: -0.02em;
+    }
+
+    /* Dark Mode: deep, rich black/blue interaction */
+    .dark body {
+        background: #000000;
+        color: #f5f5f7;
+    }
+}
+
+@layer components {
+
+    /* Apple-style Glassmorphism */
+    .glass-panel {
+        @apply rounded-[2rem] border border-white/60 shadow-xl shadow-black/5 transition-all duration-500 ease-out;
+        background: rgba(255, 255, 255, 0.65);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+    }
+
+    .glass-panel:hover {
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .dark .glass-panel {
+        @apply border-white/10 shadow-black/40;
+        background: rgba(28, 28, 30, 0.65);
+    }
+
+    /* Minimal Inputs */
+    .input-minimal {
+        @apply w-full bg-transparent border-b border-slate-300 py-3 text-center text-3xl font-light text-slate-800 focus:border-black focus:outline-none transition-colors duration-300 placeholder:text-slate-200;
+        font-family: 'Outfit', sans-serif;
+    }
+
+    .dark .input-minimal {
+        @apply border-slate-700 text-white focus:border-white placeholder:text-slate-800;
+    }
+
+    .label-micro {
+        @apply text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 mb-2 block text-center;
+    }
+
+    /* Buttons: Pill shape, subtle gradient */
+    .btn-premium {
+        @apply px-8 py-4 bg-black text-white rounded-full font-medium text-lg hover:bg-slate-800 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg shadow-black/20;
+    }
+
+    .dark .btn-premium {
+        @apply bg-white text-black hover:bg-slate-200 shadow-white/10;
+    }
+
+    .btn-secondary {
+        @apply px-6 py-3 bg-slate-100 text-slate-600 rounded-full font-medium text-sm hover:bg-slate-200 transition-all duration-300;
+    }
+
+    .dark .btn-secondary {
+        @apply bg-white/10 text-slate-300 hover:bg-white/20;
+    }
+
+    .section-container {
+        @apply w-full max-w-4xl mx-auto px-6 py-20 md:py-24 relative z-10;
+    }
+
+    /* Background Ambient Light (Northern Lights) */
+    .ambient-light {
+        @apply absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden opacity-40 mix-blend-multiply blur-[120px] filter;
+    }
+
+    .dark .ambient-light {
+        @apply mix-blend-screen opacity-20;
+    }
+}
+
+@layer utilities {
+
+    /* Apple-style Easing: easeOutQuart / spring-like */
+    .ease-spring {
+        transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .animate-reveal {
+        animation: reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .animate-scale-reveal {
+        animation: scaleReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    .delay-100 {
+        animation-delay: 100ms;
+    }
+
+    .delay-200 {
+        animation-delay: 200ms;
+    }
+
+    .delay-300 {
+        animation-delay: 300ms;
+    }
+
+    @keyframes reveal {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes scaleReveal {
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes shift-gradient {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.2);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .animate-pulse-slow {
+        animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+}
