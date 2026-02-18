@@ -25,6 +25,14 @@ export const RootLayout = () => {
     const location = useLocation();
     const { user } = useAuth();
 
+    const navItems = [
+        { to: "/", icon: Activity, label: "Home" },
+        { to: "/dashboard", icon: User, label: "Stats" },
+        { to: "/diagnostics", icon: HeartPulse, label: "Health" },
+        { to: "/tools/bmi", icon: Search, label: "BMI" },
+        { to: "/shop", icon: ShoppingBag, label: "Shop" },
+    ];
+
     return (
         <div className="min-h-screen flex flex-col relative bg-[#fbfbfd] dark:bg-black text-slate-900 dark:text-white transition-colors duration-500">
             {/* ── AMBIENT BACKGROUND ── */}
@@ -35,33 +43,38 @@ export const RootLayout = () => {
 
             {/* ── HEADER (FUNCTIONAL) ── */}
             <header className="sticky top-0 z-50 w-full border-b border-slate-200/60 dark:border-white/5 backdrop-blur-xl bg-white/70 dark:bg-black/70">
-                <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                    <Link to="/" className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-slate-900 dark:bg-white flex items-center justify-center text-white dark:text-black shadow-xl">
-                            <Activity size={22} />
+                <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
+                    <Link to="/" className="flex items-center gap-2 md:gap-3">
+                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-slate-900 dark:bg-white flex items-center justify-center text-white dark:text-black shadow-xl">
+                            <Activity size={18} className="md:size-[22px]" />
                         </div>
-                        <span className="text-xl font-bold tracking-tight">SYNERGY</span>
+                        <span className="text-lg md:text-xl font-bold tracking-tight">SYNERGY</span>
                     </Link>
 
-                    <nav className="hidden md:flex items-center gap-1">
-                        <NavLink to="/" icon={Activity} label="Home" active={location.pathname === '/'} />
-                        <NavLink to="/dashboard" icon={User} label="Dashboard" active={location.pathname === '/dashboard'} />
-                        <NavLink to="/diagnostics" icon={HeartPulse} label="Health" active={location.pathname === '/diagnostics'} />
-                        <NavLink to="/tools/bmi" icon={Search} label="BMI Tool" active={location.pathname.startsWith('/tools/bmi')} />
-                        <NavLink to="/shop" icon={ShoppingBag} label="Shop" active={location.pathname === '/shop'} />
+                    {/* Desktop Nav */}
+                    <nav className="hidden lg:flex items-center gap-1">
+                        {navItems.map((item) => (
+                            <NavLink
+                                key={item.to}
+                                to={item.to}
+                                icon={item.icon}
+                                label={item.label}
+                                active={item.to === '/' ? location.pathname === '/' : location.pathname.startsWith(item.to)}
+                            />
+                        ))}
                     </nav>
 
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2 md:gap-4">
                         <ThemeToggle />
                         {user ? (
-                            <Link to="/profile" className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 transition-colors">
-                                <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm font-bold">
+                            <Link to="/profile" className="flex items-center gap-2 p-1 md:px-4 md:py-2 rounded-full md:bg-slate-100 dark:md:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 transition-colors">
+                                <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs md:text-sm font-bold">
                                     {user.name[0].toUpperCase()}
                                 </div>
-                                <span className="font-medium text-sm">{user.name.split('@')[0]}</span>
+                                <span className="hidden md:inline font-medium text-sm">{user.name.split('@')[0]}</span>
                             </Link>
                         ) : (
-                            <Link to="/auth" className="px-6 py-2 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-sm font-bold">
+                            <Link to="/auth" className="px-4 py-1.5 md:px-6 md:py-2 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-xs md:text-sm font-bold">
                                 Sign In
                             </Link>
                         )}
@@ -70,7 +83,7 @@ export const RootLayout = () => {
             </header>
 
             {/* ── MAIN CONTENT ── */}
-            <main className="flex-1 relative z-10 w-full pb-20">
+            <main className="flex-1 relative z-10 w-full pb-24 md:pb-20">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={location.pathname}
@@ -85,8 +98,31 @@ export const RootLayout = () => {
                 </AnimatePresence>
             </main>
 
+            {/* ── MOBILE BOTTOM NAVIGATION ── */}
+            <nav className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] w-[90%] max-w-sm">
+                <div className="glass-panel flex items-center justify-around p-2 shadow-2xl border-white/20 dark:border-white/5">
+                    {navItems.map((item) => {
+                        const active = item.to === '/' ? location.pathname === '/' : location.pathname.startsWith(item.to);
+                        return (
+                            <Link
+                                key={item.to}
+                                to={item.to}
+                                className={cn(
+                                    "flex flex-col items-center gap-1 p-3 rounded-2xl transition-all duration-300",
+                                    active ? "text-blue-600 dark:text-blue-400 bg-blue-500/5" : "text-slate-400 hover:text-slate-600"
+                                )}
+                            >
+                                <item.icon size={20} className={cn(active && "animate-pulse")} />
+                                <span className="text-[10px] font-bold uppercase tracking-tighter">{item.label}</span>
+                            </Link>
+                        );
+                    })}
+                </div>
+            </nav>
+
             {/* ── HEALTH ASSISTANT CHATBOT ── */}
             <HealthAssistant />
         </div>
     );
 };
+
