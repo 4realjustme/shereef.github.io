@@ -400,7 +400,7 @@ export const HealthAssistant = () => {
                         </div>
 
                         {/* MESSAGES */}
-                        <div ref={chatContainerRef} onScroll={handleScroll} className="relative z-10 flex-1 overflow-y-auto px-6 py-8 space-y-8 scroll-smooth" style={{ scrollbarWidth: 'none' }}>
+                        <div ref={chatContainerRef} onScroll={handleScroll} className="relative z-10 flex-1 overflow-y-auto px-4 md:px-6 py-6 md:py-8 space-y-6 md:space-y-8 scroll-smooth" style={{ scrollbarWidth: 'none' }}>
                             {messages.map((msg, idx) => (
                                 <motion.div
                                     key={msg.id}
@@ -414,7 +414,7 @@ export const HealthAssistant = () => {
                                             <BotIcon />
                                         </div>
                                     )}
-                                    <div className={`max-w-[85%] rounded-[2rem] px-6 py-4 transition-all duration-300 ${msg.role === 'user'
+                                    <div className={`max-w-[90%] md:max-w-[85%] rounded-2xl md:rounded-[2rem] px-4 py-3 md:px-6 md:py-4 transition-all duration-300 ${msg.role === 'user'
                                         ? 'bg-black text-white dark:bg-white dark:text-black rounded-tr-sm shadow-xl shadow-black/5 dark:shadow-white/5'
                                         : 'bg-white/30 dark:bg-white/[0.02] border border-white/30 dark:border-white/[0.06] rounded-tl-sm'}`}>
                                         {msg.role === 'assistant' ? <RenderMarkdown text={msg.content} /> : <p className="text-[14px] leading-relaxed tracking-wide font-light">{msg.content}</p>}
@@ -445,12 +445,12 @@ export const HealthAssistant = () => {
                         </div>
 
                         {/* INPUT */}
-                        <div className="relative z-10 px-6 pb-8 pt-4 border-t border-white/10 dark:border-white/[0.03]">
-                            <div className={`flex items-end gap-3 rounded-[2rem] px-6 py-4 border transition-all duration-500 ${isGenerating
+                        <div className="relative z-10 px-4 md:px-6 pb-6 md:pb-8 pt-3 md:pt-4 border-t border-white/10 dark:border-white/[0.03]">
+                            <div className={`flex items-end gap-2 md:gap-3 rounded-[1.5rem] md:rounded-[2rem] px-4 py-3 md:px-6 md:py-4 border transition-all duration-500 ${isGenerating
                                 ? 'bg-black/5 dark:bg-white/5 border-transparent'
                                 : 'bg-white/60 dark:bg-white/[0.04] border-white/40 dark:border-white/[0.08] focus-within:border-blue-500/30 dark:focus-within:border-blue-400/20 focus-within:bg-white/90 dark:focus-within:bg-white/[0.08] focus-within:shadow-2xl focus-within:shadow-blue-500/10'}`}>
-                                <textarea ref={textareaRef} value={input} onChange={(e) => { setInput(e.target.value); adjustTextarea(); }} onKeyDown={handleKeyDown} placeholder={isGenerating ? 'Synthesizing...' : 'Describe your health inquiry...'} disabled={isGenerating} rows={1} className="flex-1 bg-transparent text-[14px] text-slate-800 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 outline-none resize-none leading-relaxed max-h-[160px] disabled:opacity-50 font-light tracking-wide" />
-                                <button onClick={handleSend} disabled={!input.trim() || isGenerating} className="shrink-0 w-10 h-10 rounded-2xl bg-black dark:bg-white text-white dark:text-black flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed hover:scale-110 active:scale-90 transition-all cursor-pointer mb-0.5 shadow-lg shadow-black/10 dark:shadow-white/5"><Send size={16} /></button>
+                                <textarea ref={textareaRef} value={input} onChange={(e) => { setInput(e.target.value); adjustTextarea(); }} onKeyDown={handleKeyDown} placeholder={isGenerating ? 'Synthesizing...' : 'Health inquiry...'} disabled={isGenerating} rows={1} className="flex-1 bg-transparent text-[13px] md:text-[14px] text-slate-800 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 outline-none resize-none leading-relaxed max-h-[140px] disabled:opacity-50 font-light tracking-wide" />
+                                <button onClick={handleSend} disabled={!input.trim() || isGenerating} className="shrink-0 w-9 h-9 md:w-10 md:h-10 rounded-xl md:rounded-2xl bg-black dark:bg-white text-white dark:text-black flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed hover:scale-110 active:scale-90 transition-all cursor-pointer mb-0.5 shadow-lg shadow-black/10 dark:shadow-white/5"><Send size={14} className="md:size-[16px]" /></button>
                             </div>
                             <p className="text-[10px] text-center mt-3 text-slate-400 dark:text-slate-600 tracking-[0.15em] font-medium opacity-50 uppercase">
                                 PROCESSED BY SYNERGY AI · EDUCATIONAL MODE

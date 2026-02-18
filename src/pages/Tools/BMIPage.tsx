@@ -35,19 +35,21 @@ export const BMI = () => {
 
     return (
         <div className="section-container">
-            <div className="text-center space-y-4 mb-16">
+            <div className="text-center space-y-3 md:space-y-4 mb-10 md:mb-16">
                 <span className="label-micro">Tools & Metrics</span>
-                <h1 className="text-5xl font-bold tracking-tight text-slate-900 dark:text-white">BMI Calculator.</h1>
-                <p className="text-lg text-slate-500 dark:text-slate-400 font-medium max-w-sm mx-auto">Professional biometric analysis.</p>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white">BMI Calculator.</h1>
+                <p className="text-base md:text-lg text-slate-500 dark:text-slate-400 font-medium max-w-sm mx-auto">Professional biometric analysis.</p>
             </div>
 
-            <div className="max-w-xl mx-auto space-y-12">
+
+            <div className="max-w-xl mx-auto space-y-8 md:space-y-12">
                 <InputForm input={input} onChange={handleChange} onCalculate={handleCalculate} />
             </div>
 
             <AnimatePresence>
                 {showResults && result && (
-                    <motion.div ref={resultRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="w-full space-y-16 mt-20">
+                    <motion.div ref={resultRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="w-full space-y-12 md:space-y-16 mt-12 md:mt-20">
+
                         <ResultCard result={result} gender={input.gender} />
                         <div className="grid grid-cols-1 gap-8">
                             <DietSuggestion />
