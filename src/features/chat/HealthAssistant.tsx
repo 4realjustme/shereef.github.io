@@ -308,8 +308,9 @@ export const HealthAssistant = () => {
                         animate={{ scale: 1, opacity: 1, y: 0 }}
                         exit={{ scale: 0.8, opacity: 0, y: 20 }}
                         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        className="hidden md:flex fixed bottom-8 right-8 z-50 flex-col items-end gap-5"
+                        className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex flex-col items-end gap-5"
                     >
+
 
                         {/* Premium Arrival Toast */}
                         <AnimatePresence>
@@ -364,12 +365,13 @@ export const HealthAssistant = () => {
                         exit={{ opacity: 0, y: 30, scale: 0.96 }}
                         transition={{ type: 'spring', stiffness: 280, damping: 32 }}
                         className="fixed z-50
-                            bottom-0 right-0 w-full h-[85%]
+                            bottom-6 right-6 w-[calc(100%-48px)] h-[500px] max-h-[70vh]
                             md:bottom-8 md:right-8 md:w-[480px] md:h-[720px] md:max-h-[calc(100vh-60px)]
-                            rounded-t-[2.5rem] md:rounded-[3rem]
+                            rounded-[1.5rem] md:rounded-[3rem]
                             flex flex-col overflow-hidden
                             border border-white/30 dark:border-white/[0.08]
                             shadow-[0_40px_80px_-20px_rgba(0,0,0,0.4)] dark:md:shadow-black/70"
+
 
                         style={{
                             background: 'rgba(255,255,255,0.7)',

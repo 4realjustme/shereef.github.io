@@ -1,6 +1,6 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { ThemeToggle } from '../ui/ThemeToggle';
-import { Activity, Search, User, ShoppingBag, Bot, Menu, X } from 'lucide-react';
+import { Activity, Search, User, ShoppingBag, Menu, X } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuth } from '../../features/auth/AuthContext';
@@ -26,15 +26,15 @@ const NavLink = ({ to, icon: Icon, label, active, onClick }: { to: string; icon:
 export const RootLayout = () => {
     const location = useLocation();
     const { user } = useAuth();
-    const { toggleChat, isChatOpen, isSidebarOpen, toggleSidebar, setSidebarOpen } = useUI();
+    const { isSidebarOpen, toggleSidebar, setSidebarOpen } = useUI();
 
     const navItems = [
         { to: "/", icon: Activity, label: "Home" },
         { to: "/dashboard", icon: User, label: "Stats" },
-        { to: "/chat", icon: Bot, label: "Assistant", isChat: true },
         { to: "/tools/bmi", icon: Search, label: "BMI" },
         { to: "/shop", icon: ShoppingBag, label: "Shop" },
     ];
+
 
     return (
         <div className="min-h-screen flex flex-col relative bg-[#fbfbfd] dark:bg-black text-slate-900 dark:text-white transition-colors duration-500">
@@ -79,31 +79,16 @@ export const RootLayout = () => {
 
                             <nav className="flex flex-col gap-2">
                                 {navItems.map((item) => (
-                                    item.isChat ? (
-                                        <button
-                                            key="mobile-chat-trigger"
-                                            onClick={() => { toggleChat(); setSidebarOpen(false); }}
-                                            className={cn(
-                                                "flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300",
-                                                isChatOpen
-                                                    ? "bg-primary-900 text-white dark:bg-white dark:text-primary-900 shadow-xl"
-                                                    : "text-slate-500 hover:bg-slate-100 dark:hover:bg-white/10"
-                                            )}
-                                        >
-                                            <item.icon size={20} />
-                                            <span className="text-base font-semibold">{item.label}</span>
-                                        </button>
-                                    ) : (
-                                        <NavLink
-                                            key={item.to}
-                                            to={item.to}
-                                            icon={item.icon}
-                                            label={item.label}
-                                            active={item.to === '/' ? location.pathname === '/' : location.pathname.startsWith(item.to)}
-                                            onClick={() => setSidebarOpen(false)}
-                                        />
-                                    )
+                                    <NavLink
+                                        key={item.to}
+                                        to={item.to}
+                                        icon={item.icon}
+                                        label={item.label}
+                                        active={item.to === '/' ? location.pathname === '/' : location.pathname.startsWith(item.to)}
+                                        onClick={() => setSidebarOpen(false)}
+                                    />
                                 ))}
+
                             </nav>
 
                             <div className="mt-auto pt-6 border-t border-slate-200 dark:border-white/10">
@@ -151,30 +136,15 @@ export const RootLayout = () => {
                     {/* Desktop Nav */}
                     <nav className="hidden lg:flex items-center gap-1">
                         {navItems.map((item) => (
-                            item.isChat ? (
-                                <button
-                                    key="desktop-chat-trigger"
-                                    onClick={toggleChat}
-                                    className={cn(
-                                        "flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300",
-                                        isChatOpen
-                                            ? "bg-primary-900 text-white dark:bg-white dark:text-primary-900 shadow-lg"
-                                            : "text-slate-500 hover:bg-slate-100 dark:hover:bg-white/10"
-                                    )}
-                                >
-                                    <item.icon size={18} />
-                                    <span className="text-sm font-medium">{item.label}</span>
-                                </button>
-                            ) : (
-                                <NavLink
-                                    key={item.to}
-                                    to={item.to}
-                                    icon={item.icon}
-                                    label={item.label}
-                                    active={item.to === '/' ? location.pathname === '/' : location.pathname.startsWith(item.to)}
-                                />
-                            )
+                            <NavLink
+                                key={item.to}
+                                to={item.to}
+                                icon={item.icon}
+                                label={item.label}
+                                active={item.to === '/' ? location.pathname === '/' : location.pathname.startsWith(item.to)}
+                            />
                         ))}
+
                     </nav>
 
                     <div className="flex items-center gap-2 md:gap-4">
