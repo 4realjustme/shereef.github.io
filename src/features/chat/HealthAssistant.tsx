@@ -305,7 +305,7 @@ export const HealthAssistant = () => {
                         animate={{ scale: 1, opacity: 1, y: 0 }}
                         exit={{ scale: 0.8, opacity: 0, y: 20 }}
                         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        className="fixed bottom-8 right-8 z-50 flex flex-col items-end gap-5"
+                        className="fixed bottom-24 right-5 md:bottom-8 md:right-8 z-50 flex flex-col items-end gap-5"
                     >
                         {/* Premium Arrival Toast */}
                         <AnimatePresence>
@@ -318,19 +318,19 @@ export const HealthAssistant = () => {
                                     onClick={() => { setShowPopup(false); setIsOpen(true); }}
                                     className="relative cursor-pointer group"
                                 >
-                                    <div className="px-6 py-4 rounded-[2rem] bg-white/70 dark:bg-black/40 backdrop-blur-3xl border border-white/40 dark:border-white/10 shadow-2xl shadow-black/10 transition-all hover:scale-105 active:scale-95">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center">
-                                                <Bot size={14} className="text-blue-500" />
+                                    <div className="px-5 py-3 md:px-6 md:py-4 rounded-2xl md:rounded-[2rem] bg-white/70 dark:bg-black/40 backdrop-blur-3xl border border-white/40 dark:border-white/10 shadow-2xl shadow-black/10 transition-all hover:scale-105 active:scale-95">
+                                        <div className="flex items-center gap-2 md:gap-3">
+                                            <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-blue-500/10 flex items-center justify-center">
+                                                <Bot size={12} className="text-blue-500 md:size-[14px]" />
                                             </div>
                                             <div>
-                                                <p className="text-[13px] font-semibold text-slate-900 dark:text-white tracking-wide">HEALTH ASSISTANT</p>
-                                                <p className="text-[11px] text-slate-500 dark:text-slate-400 font-light mt-0.5">Start a conversation</p>
+                                                <p className="text-[11px] md:text-[13px] font-semibold text-slate-900 dark:text-white tracking-wide">HEALTH ASSISTANT</p>
+                                                <p className="text-[9px] md:text-[11px] text-slate-500 dark:text-slate-400 font-light md:mt-0.5">Start a conversation</p>
                                             </div>
                                         </div>
-                                        <button onClick={(e) => { e.stopPropagation(); setShowPopup(false); }} className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-[10px] text-slate-400 hover:text-red-500 transition-colors">✕</button>
+                                        <button onClick={(e) => { e.stopPropagation(); setShowPopup(false); }} className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-[8px] md:text-[10px] text-slate-400 hover:text-red-500 transition-colors">✕</button>
                                     </div>
-                                    <div className="absolute -bottom-1.5 right-8 w-3 h-3 bg-white/70 dark:bg-black/40 border-r border-b border-white/40 dark:border-white/10 rotate-45 backdrop-blur-3xl" />
+                                    <div className="absolute -bottom-1.5 right-6 md:right-8 w-3 h-3 bg-white/70 dark:bg-black/40 border-r border-b border-white/40 dark:border-white/10 rotate-45 backdrop-blur-3xl" />
                                 </motion.div>
                             )}
                         </AnimatePresence>
@@ -338,7 +338,7 @@ export const HealthAssistant = () => {
                         {/* FAB Button */}
                         <button
                             onClick={() => { setShowPopup(false); setIsOpen(true); }}
-                            className="w-16 h-16 rounded-[2rem] bg-black dark:bg-white text-white dark:text-black shadow-2xl shadow-black/30 dark:shadow-white/10 flex items-center justify-center hover:scale-[1.08] active:scale-90 transition-all duration-500 group relative overflow-hidden"
+                            className="w-14 h-14 md:w-16 md:h-16 rounded-2xl md:rounded-[2rem] bg-black dark:bg-white text-white dark:text-black shadow-2xl shadow-black/30 dark:shadow-white/10 flex items-center justify-center hover:scale-[1.08] active:scale-90 transition-all duration-500 group relative overflow-hidden"
                             aria-label="Open Health Assistant"
                         >
                             <div className="w-full h-full flex items-center justify-center pointer-events-none transition-transform duration-700 group-hover:scale-110">
@@ -360,12 +360,13 @@ export const HealthAssistant = () => {
                         exit={{ opacity: 0, y: 30, scale: 0.96 }}
                         transition={{ type: 'spring', stiffness: 280, damping: 32 }}
                         className="fixed z-50
-                            bottom-0 right-0 w-full h-full
-                            sm:bottom-8 sm:right-8 sm:w-[480px] sm:h-[720px] sm:max-h-[calc(100vh-60px)]
-                            sm:rounded-[3rem]
+                            bottom-0 right-0 w-full h-[85%]
+                            md:bottom-8 md:right-8 md:w-[480px] md:h-[720px] md:max-h-[calc(100vh-60px)]
+                            rounded-t-[2.5rem] md:rounded-[3rem]
                             flex flex-col overflow-hidden
                             border border-white/30 dark:border-white/[0.08]
-                            shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)] dark:sm:shadow-black/70"
+                            shadow-[0_40px_80px_-20px_rgba(0,0,0,0.4)] dark:md:shadow-black/70"
+
                         style={{
                             background: 'rgba(255,255,255,0.7)',
                             backdropFilter: 'blur(50px) saturate(210%) font-smoothing: antialiased',
@@ -457,7 +458,7 @@ export const HealthAssistant = () => {
                         </div>
                     </motion.div>
                 )}
-            </AnimatePresence>
+            </AnimatePresence >
         </>
     );
 };
