@@ -110,7 +110,8 @@ export const RootLayout = () => {
                                 to={item.to}
                                 className={cn(
                                     "flex flex-col items-center gap-1 p-3 rounded-2xl transition-all duration-300",
-                                    active ? "text-blue-600 dark:text-blue-400 bg-blue-500/5" : "text-slate-400 hover:text-slate-600"
+                                    active ? "text-primary-600 dark:text-primary-400 bg-primary-500/5" : "text-slate-400 hover:text-slate-600"
+
                                 )}
                             >
                                 <item.icon size={20} className={cn(active && "animate-pulse")} />
