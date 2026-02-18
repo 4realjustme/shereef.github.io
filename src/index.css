@@ -7,11 +7,11 @@
         scroll-behavior: smooth;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        selection-background-color: rgba(59, 130, 246, 0.2);
+        selection-background-color: rgba(167, 235, 242, 0.4);
     }
 
     ::selection {
-        background: rgba(59, 130, 246, 0.15);
+        background: rgba(84, 172, 191, 0.3);
         color: inherit;
     }
 
@@ -92,10 +92,19 @@
 
 
 
-    /* Background Ambient Light (Zen Drift) */
+    /* Background Ambient Light (Neurowell Drift) */
     .ambient-light {
-        @apply absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden opacity-15 blur-[200px] filter;
+        @apply absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden opacity-20 blur-[150px] filter;
+        background: radial-gradient(circle at 20% 30%, #A7EBF2 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, #26658C 0%, transparent 50%);
     }
+
+    .dark .ambient-light {
+        opacity: 0.15;
+        background: radial-gradient(circle at 20% 30%, #54ACBF 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, #011C40 0%, transparent 50%);
+    }
+
 }
 
 @layer utilities {

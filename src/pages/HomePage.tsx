@@ -34,10 +34,10 @@ export const Home = () => {
                     transition={{ duration: 0.6 }}
                     className="space-y-6 md:space-y-8"
                 >
-                    <div className="label-micro">Synergy Health OS</div>
+                    <div className="label-micro">Neurowell OS</div>
 
-                    <h1 className="text-4xl sm:text-5xl md:text-8xl font-bold tracking-tight text-slate-900 dark:text-white leading-[1.15] md:leading-[1.1]">
-                        Health intelligence <br /> <span className="text-blue-600">reimagined.</span>
+                    <h1 className="text-4xl sm:text-5xl md:text-8xl font-bold font-display tracking-tight text-slate-900 dark:text-white leading-[1.15] md:leading-[1.1]">
+                        Health intelligence <br /> <span className="text-primary-600">reimagined.</span>
                     </h1>
 
                     <p className="text-base md:text-xl text-slate-500 dark:text-slate-400 font-medium max-w-2xl mx-auto leading-relaxed px-4 md:px-0">
@@ -58,7 +58,6 @@ export const Home = () => {
 
             {/* ── FEATURES GRID ── */}
             <section className="w-full max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 pb-20 md:pb-32">
-
                 <FeatureCard
                     icon={Brain}
                     title="Predictive AI"
@@ -78,6 +77,23 @@ export const Home = () => {
                     delay={3}
                 />
             </section>
+
+            {/* ── MAKE IN INDIA NOTICE ── */}
+            <footer className="w-full py-12 md:py-20 border-t border-slate-200/60 dark:border-white/5 text-center">
+                <div className="flex flex-col items-center gap-4">
+                    <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 font-display font-bold tracking-widest text-[10px] uppercase">
+                        <span>Make in India</span>
+                        <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700" />
+                        <span>Neurowell © 2026</span>
+                    </div>
+                    <div className="flex gap-4">
+                        <div className="w-6 h-[2px] bg-orange-500/30" />
+                        <div className="w-6 h-[2px] bg-white/30" />
+                        <div className="w-6 h-[2px] bg-green-500/30" />
+                    </div>
+                </div>
+            </footer>
+
         </div>
     );
 };

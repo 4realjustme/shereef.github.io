@@ -48,7 +48,8 @@ export const RootLayout = () => {
                         <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-slate-900 dark:bg-white flex items-center justify-center text-white dark:text-black shadow-xl">
                             <Activity size={18} className="md:size-[22px]" />
                         </div>
-                        <span className="text-lg md:text-xl font-bold tracking-tight">SYNERGY</span>
+                        <span className="text-lg md:text-xl font-bold font-display tracking-tight uppercase">Neurowell</span>
+
                     </Link>
 
                     {/* Desktop Nav */}
