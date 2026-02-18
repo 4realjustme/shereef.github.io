@@ -20,8 +20,8 @@ export const ResultCard: React.FC<ResultCardProps> = ({ result, gender }) => {
     return (
         <div className="w-full grid md:grid-cols-2 gap-12 items-center">
             {/* Left: Character - Clean Presentation */}
-            <div className="flex flex-col items-center justify-center relative">
-                <div className="scale-125 transform transition-transform duration-700 hover:scale-[1.3] ease-spring">
+            <div className="flex flex-col items-center justify-center relative py-12">
+                <div className="scale-150 transform transition-all duration-1000 hover:scale-[1.6] ease-spring opacity-90">
                     <HumanFigure category={result.category} gender={gender} />
                 </div>
             </div>
@@ -31,11 +31,11 @@ export const ResultCard: React.FC<ResultCardProps> = ({ result, gender }) => {
 
                 {/* Main Score */}
                 <div>
-                    <div className="flex items-baseline gap-4 mb-2">
-                        <h3 className="text-8xl font-black tracking-tighter text-slate-900 dark:text-white font-display">
+                    <div className="flex items-baseline gap-6 mb-4">
+                        <h3 className="text-9xl font-black tracking-[-0.08em] text-slate-900 dark:text-white">
                             {result.bmi}
                         </h3>
-                        <span className="text-xl font-medium text-slate-500 dark:text-slate-400 capitalize">
+                        <span className="text-2xl font-light tracking-wide text-blue-500 dark:text-blue-400 uppercase">
                             {result.category}
                         </span>
                     </div>
@@ -58,26 +58,26 @@ export const ResultCard: React.FC<ResultCardProps> = ({ result, gender }) => {
                 </div>
 
                 {/* Supporting Stats - Grid */}
-                <div className="grid grid-cols-2 gap-x-8 gap-y-8 border-t border-slate-100 dark:border-white/5 pt-8">
+                <div className="grid grid-cols-2 gap-x-12 gap-y-12 border-t border-slate-100 dark:border-white/5 pt-12">
                     <div>
-                        <span className="label-micro text-left">Healthy Range</span>
-                        <p className="text-2xl font-light text-slate-800 dark:text-slate-200">
-                            {result.healthyRange.min} — {result.healthyRange.max} <span className="text-sm text-slate-400">kg</span>
+                        <span className="label-micro text-left">Ideal Target</span>
+                        <p className="text-4xl font-extralight text-slate-900 dark:text-white tracking-tight">
+                            {result.healthyRange.min} — {result.healthyRange.max} <span className="text-base text-slate-400 tracking-normal uppercase ml-1">kg</span>
                         </p>
                     </div>
 
                     <div>
-                        <span className="label-micro text-left">Daily Maintenance</span>
-                        <p className="text-2xl font-light text-slate-800 dark:text-slate-200">
-                            {result.calories.maintenance} <span className="text-sm text-slate-400">kcal</span>
+                        <span className="label-micro text-left">Metabolic Need</span>
+                        <p className="text-4xl font-extralight text-slate-900 dark:text-white tracking-tight">
+                            {result.calories.maintenance} <span className="text-base text-slate-400 tracking-normal uppercase ml-1">kcal</span>
                         </p>
                     </div>
 
                     {result.category !== 'Normal' && (
-                        <div className="col-span-2">
-                            <span className="label-micro text-left">Recommendation</span>
-                            <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                                To reach a healthy weight, aim for a daily intake of <strong className="text-black dark:text-white font-semibold">{result.category === 'Underweight' ? result.calories.gain : result.calories.loss} kcal</strong>. {result.prediction}
+                        <div className="col-span-2 bg-blue-500/5 dark:bg-white/5 p-8 rounded-[2rem] border border-blue-500/10 dark:border-white/10">
+                            <span className="label-micro text-left">PRO-ACTIVE RECOVERY</span>
+                            <p className="text-xl text-slate-700 dark:text-slate-300 leading-relaxed font-light">
+                                To reach a healthy weight, aim for a daily intake of <strong className="text-black dark:text-white font-semibold underline decoration-blue-500/30 underline-offset-8">{result.category === 'Underweight' ? result.calories.gain : result.calories.loss} kcal</strong>. {result.prediction}
                             </p>
                         </div>
                     )}

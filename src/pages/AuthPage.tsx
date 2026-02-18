@@ -18,7 +18,7 @@ export const Auth = () => {
 
     useEffect(() => {
         if (isAuthenticated) {
-            navigate('/dashboard');
+            navigate('/onboarding');
         }
     }, [isAuthenticated, navigate]);
 
@@ -69,7 +69,7 @@ export const Auth = () => {
         setIsLoading(false);
 
         if (success) {
-            navigate('/dashboard');
+            navigate('/onboarding');
         } else {
             setError('Invalid code. Try 1234');
         }

@@ -7,6 +7,8 @@ import { Auth as AuthPage } from './pages/AuthPage';
 import { Profile as ProfilePage } from './pages/ProfilePage';
 import { Diagnostics as DiagnosticsPage } from './pages/DiagnosticsPage';
 import { BMI as BMIPage } from './pages/Tools/BMIPage';
+import { QuestionsPage } from './pages/QuestionsPage';
+import { ShopPage } from './pages/ShopPage';
 
 function App() {
     return (
@@ -17,6 +19,8 @@ function App() {
                 <Route path="auth" element={<AuthPage />} />
                 <Route path="profile" element={<ProfilePage />} />
                 <Route path="diagnostics" element={<DiagnosticsPage />} />
+                <Route path="onboarding" element={<QuestionsPage />} />
+                <Route path="shop" element={<ShopPage />} />
                 <Route path="tools">
                     <Route path="bmi" element={<BMIPage />} />
                 </Route>
