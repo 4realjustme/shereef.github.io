@@ -1,9 +1,10 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { ThemeToggle } from '../ui/ThemeToggle';
-import { Activity, HeartPulse, Search, User, ShoppingBag } from 'lucide-react';
+import { Activity, Search, User, ShoppingBag, Bot } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuth } from '../../features/auth/AuthContext';
+import { useUI } from '../../context/UIContext';
 import { HealthAssistant } from '../../features/chat/HealthAssistant';
 
 const NavLink = ({ to, icon: Icon, label, active }: { to: string; icon: any; label: string; active: boolean }) => (
@@ -12,7 +13,7 @@ const NavLink = ({ to, icon: Icon, label, active }: { to: string; icon: any; lab
         className={cn(
             "flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300",
             active
-                ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-lg"
+                ? "bg-primary-900 text-white dark:bg-white dark:text-primary-900 shadow-lg"
                 : "text-slate-500 hover:bg-slate-100 dark:hover:bg-white/10"
         )}
     >
@@ -24,11 +25,12 @@ const NavLink = ({ to, icon: Icon, label, active }: { to: string; icon: any; lab
 export const RootLayout = () => {
     const location = useLocation();
     const { user } = useAuth();
+    const { toggleChat, isChatOpen } = useUI();
 
     const navItems = [
         { to: "/", icon: Activity, label: "Home" },
         { to: "/dashboard", icon: User, label: "Stats" },
-        { to: "/diagnostics", icon: HeartPulse, label: "Health" },
+        { to: "/chat", icon: Bot, label: "Assistant", isChat: true },
         { to: "/tools/bmi", icon: Search, label: "BMI" },
         { to: "/shop", icon: ShoppingBag, label: "Shop" },
     ];
@@ -49,19 +51,34 @@ export const RootLayout = () => {
                             <Activity size={18} className="md:size-[22px]" />
                         </div>
                         <span className="text-lg md:text-xl font-bold font-display tracking-tight uppercase">Neurowell</span>
-
                     </Link>
 
                     {/* Desktop Nav */}
                     <nav className="hidden lg:flex items-center gap-1">
                         {navItems.map((item) => (
-                            <NavLink
-                                key={item.to}
-                                to={item.to}
-                                icon={item.icon}
-                                label={item.label}
-                                active={item.to === '/' ? location.pathname === '/' : location.pathname.startsWith(item.to)}
-                            />
+                            item.isChat ? (
+                                <button
+                                    key="chat-trigger"
+                                    onClick={toggleChat}
+                                    className={cn(
+                                        "flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300",
+                                        isChatOpen
+                                            ? "bg-primary-900 text-white dark:bg-white dark:text-primary-900 shadow-lg"
+                                            : "text-slate-500 hover:bg-slate-100 dark:hover:bg-white/10"
+                                    )}
+                                >
+                                    <item.icon size={18} />
+                                    <span className="text-sm font-medium">{item.label}</span>
+                                </button>
+                            ) : (
+                                <NavLink
+                                    key={item.to}
+                                    to={item.to}
+                                    icon={item.icon}
+                                    label={item.label}
+                                    active={item.to === '/' ? location.pathname === '/' : location.pathname.startsWith(item.to)}
+                                />
+                            )
                         ))}
                     </nav>
 
@@ -103,7 +120,24 @@ export const RootLayout = () => {
             <nav className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] w-[90%] max-w-sm">
                 <div className="glass-panel flex items-center justify-around p-2 shadow-2xl border-white/20 dark:border-white/5">
                     {navItems.map((item) => {
-                        const active = item.to === '/' ? location.pathname === '/' : location.pathname.startsWith(item.to);
+                        const active = item.isChat ? isChatOpen : (item.to === '/' ? location.pathname === '/' : location.pathname.startsWith(item.to));
+
+                        if (item.isChat) {
+                            return (
+                                <button
+                                    key="mobile-chat"
+                                    onClick={toggleChat}
+                                    className={cn(
+                                        "flex flex-col items-center gap-1 p-3 rounded-2xl transition-all duration-300",
+                                        active ? "text-primary-600 dark:text-primary-400 bg-primary-500/5" : "text-slate-400 hover:text-slate-600"
+                                    )}
+                                >
+                                    <item.icon size={20} className={cn(active && "animate-pulse")} />
+                                    <span className="text-[10px] font-bold uppercase tracking-tighter">{item.label}</span>
+                                </button>
+                            );
+                        }
+
                         return (
                             <Link
                                 key={item.to}
@@ -111,7 +145,6 @@ export const RootLayout = () => {
                                 className={cn(
                                     "flex flex-col items-center gap-1 p-3 rounded-2xl transition-all duration-300",
                                     active ? "text-primary-600 dark:text-primary-400 bg-primary-500/5" : "text-slate-400 hover:text-slate-600"
-
                                 )}
                             >
                                 <item.icon size={20} className={cn(active && "animate-pulse")} />
@@ -127,4 +160,3 @@ export const RootLayout = () => {
         </div>
     );
 };
-

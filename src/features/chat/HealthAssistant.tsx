@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { useUI } from '../../context/UIContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     X, Send, Bot, User, RotateCcw, AlertCircle, ChevronDown,
@@ -145,8 +146,9 @@ const ScrollToBottom = ({ onClick, visible }: { onClick: () => void; visible: bo
 
 /* ═══════════════════════════ MAIN COMPONENT ═══════════════════════════ */
 export const HealthAssistant = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const { isChatOpen: isOpen, setChatOpen: setIsOpen } = useUI();
     const [messages, setMessages] = useState<ChatMessage[]>([WELCOME]);
+
     const [input, setInput] = useState('');
     const [isGenerating, setIsGenerating] = useState(false);
     const [isThinking, setIsThinking] = useState(false);
@@ -298,6 +300,7 @@ export const HealthAssistant = () => {
     return (
         <>
             {/* ════════════ FAB BUTTON + POPUP ════════════ */}
+            {/* FAB only visible on md+ screens to avoid clashing with bottom nav on mobile */}
             <AnimatePresence>
                 {!isOpen && (
                     <motion.div
@@ -305,8 +308,9 @@ export const HealthAssistant = () => {
                         animate={{ scale: 1, opacity: 1, y: 0 }}
                         exit={{ scale: 0.8, opacity: 0, y: 20 }}
                         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        className="fixed bottom-24 right-5 md:bottom-8 md:right-8 z-50 flex flex-col items-end gap-5"
+                        className="hidden md:flex fixed bottom-8 right-8 z-50 flex-col items-end gap-5"
                     >
+
                         {/* Premium Arrival Toast */}
                         <AnimatePresence>
                             {showPopup && (
